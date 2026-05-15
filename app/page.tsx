@@ -382,4 +382,4 @@ const TABS = ["Dashboard","Traders","Upload Data","Rules","Branding","Embed Widg
       <style>{`@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}`}</style>
     </div>
   );
-}</div>
+}
