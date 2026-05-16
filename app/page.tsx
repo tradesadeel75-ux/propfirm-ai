@@ -21,7 +21,7 @@ const initialRules = {
 const TABS = ["Dashboard","Traders","Upload Data","Rules","Branding","Embed Widget","Preview AI"];export default function AdminPanel() {
   const [activeTab, setActiveTab] = useState("Dashboard");
   const [traders, setTraders] = useState(initialTraders);
-  const [rules, setRules] = useState(initialRules);
+  const [rules, setRules] = useState(()=>{try{const s=localStorage.getItem("pf_rules");return s?JSON.parse(s):initialRules;}catch{return initialRules;}});
   const [savedRules, setSavedRules] = useState(initialRules);
   const [rulesSaved, setRulesSaved] = useState(false);
   const [brandName, setBrandName] = useState("AlphaFund Pro");
@@ -47,7 +47,7 @@ const TABS = ["Dashboard","Traders","Upload Data","Rules","Branding","Embed Widg
   const avgDd = (traders.reduce((a,b)=>a+b.dd,0)/traders.length).toFixed(1);
   const statusColor = (s:string) => s==="Active"?"#10b981":s==="Passed"?"#3b82f6":"#ef4444";
 
-  function saveRules() { setSavedRules({...rules}); setRulesSaved(true); setTimeout(()=>setRulesSaved(false),2500); }
+  function saveRules() { setSavedRules({...rules}); localStorage.setItem("pf_rules",JSON.stringify(rules)); setRulesSaved(true); setTimeout(()=>setRulesSaved(false),2500); }
 
   function parseCSV(text:string) {
     setCsvError(""); setCsvSuccess("");
