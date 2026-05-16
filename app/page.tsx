@@ -237,7 +237,7 @@ const TABS = ["Dashboard","Traders","Upload Data","Rules","Branding","Embed Widg
               </div>
               {rules.consistencyEnabled && (
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
-                  {[{label:"Min Daily Trades",key:"minDailyTrades",min:1,max:20},{label:"Min Daily Volume (lots)",key:"minDailyVolume",min:1,max:100},{label:"Max Daily Trades",key:"maxDailyTrades",min:1,max:50},{label:"Consistency Score (%)",key:"consistencyScore",min:0,max:100}].map(f=>(
+                  {[{label:"Min Daily Trades",key:"minDailyTrades",min:0,max:20},{label:"Min Daily Volume (lots)",key:"minDailyVolume",min:0,max:100},{label:"Max Daily Trades",key:"maxDailyTrades",min:1,max:50},{label:"Consistency Score (%)",key:"consistencyScore",min:0,max:100}].map(f=>(
                     <div key={f.key} style={{background:"#f9fafb",borderRadius:8,padding:14,border:"1px solid #e5e7eb",position:"relative"}}>
                       <label style={{fontSize:12,fontWeight:500,color:"#374151",display:"block",marginBottom:8}}>{f.label}</label>
                       <div style={{display:"flex",alignItems:"center",gap:10}}>
