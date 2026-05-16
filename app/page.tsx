@@ -304,6 +304,31 @@ const TABS = ["Dashboard","Traders","Upload Data","Rules","Branding","Embed Widg
                 </div>
               ))}
             </div>
+            <div style={{background:"#fff",borderRadius:10,padding:18,border:"1px solid #e5e7eb",marginBottom:20}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
+                <div>
+                  <div style={{fontSize:13,fontWeight:600,color:"#374151"}}>Consistency Rule</div>
+                  <div style={{fontSize:12,color:"#9ca3af",marginTop:4}}>Trader ko har din minimum trading karni hogi</div>
+                </div>
+                <div onClick={()=>setRules(prev=>({...prev,consistencyEnabled:!(prev as any).consistencyEnabled}))}
+                  style={{width:44,height:24,borderRadius:12,cursor:"pointer",background:(rules as any).consistencyEnabled?brandColor:"#d1d5db",position:"relative",flexShrink:0,transition:"background 0.2s"}}>
+                  <div style={{width:18,height:18,borderRadius:"50%",background:"#fff",position:"absolute",top:3,left:(rules as any).consistencyEnabled?23:3,transition:"left 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.2)"}}/>
+                </div>
+              </div>
+              {(rules as any).consistencyEnabled && (
+                <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+                  {[{label:"Min Daily Trades",key:"minDailyTrades",min:1,max:20},{label:"Min Daily Volume (lots)",key:"minDailyVolume",min:1,max:100},{label:"Max Daily Trades",key:"maxDailyTrades",min:1,max:50},{label:"Consistency Score (%)",key:"consistencyScore",min:50,max:100}].map(f=>(
+                    <div key={f.key} style={{background:"#f9fafb",borderRadius:8,padding:14,border:"1px solid #e5e7eb"}}>
+                      <label style={{fontSize:12,fontWeight:500,color:"#374151",display:"block",marginBottom:8}}>{f.label}</label>
+                      <div style={{display:"flex",alignItems:"center",gap:10}}>
+                        <input type="range" min={f.min} max={f.max} value={(rules as any)[f.key]||f.min} onChange={e=>setRules(prev=>({...prev,[f.key]:Number(e.target.value)}))} style={{flex:1,accentColor:brandColor}}/>
+                        <input type="number" min={f.min} max={f.max} value={(rules as any)[f.key]||f.min} onChange={e=>setRules(prev=>({...prev,[f.key]:Number(e.target.value)}))} style={{width:55,padding:"5px 6px",borderRadius:6,border:"1px solid #d1d5db",textAlign:"center",fontSize:13,fontWeight:600,color:brandColor,fontFamily:"inherit"}}/>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
             <button onClick={saveRules} style={{background:brandColor,color:"#fff",border:"none",borderRadius:8,padding:"12px 28px",fontSize:14,fontWeight:600,cursor:"pointer"}}>
               {rulesSaved?"✅ Saved!":"Save Rules"}
             </button>
